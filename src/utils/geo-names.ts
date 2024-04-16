@@ -8,8 +8,7 @@ export class GeoNames {
   }
 
   async searchCity(city: string) {
-    const url = `${this.baseUrl}/searchJSON?q=${city}&maxRows=10&username=${this.username}`;
-    console.log(url);
+    const url = `${this.baseUrl}/searchJSON?q=${city}&maxRows=3&username=${this.username}`;
     const response = await fetch(url);
     const cities = await response.json();
     return cities.geonames.map((city: any) => ({

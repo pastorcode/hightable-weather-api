@@ -10,9 +10,8 @@ export class OpenWeather {
     this.baseUrl = 'https://api.openweathermap.org/data/2.5';
   }
 
-  async getWeather(city: string, units?: string) {
+  async getWeather(city: string, units: string) {
     const url = `${this.baseUrl}/weather?q=${city}&appid=${this.apiKey}&units=${UNIT_ENUM[units]}`;
-    console.log(url);
     const response = await fetch(url);
     const resObj = await response.json();
     if (resObj.cod !== 200) {
