@@ -1,26 +1,73 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { RegisterDto } from './dto/register.dto';
+import { UsersService } from '../users/users.service';
+import { ErrorMessages } from '../../utils/constants/error-messages.enum';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+  private readonly userService: UsersService;
+
+  constructor(userService: UsersService) {
+    this.userService = userService;
+  }
+  async create(data: RegisterDto) {
+    const { password } = data;
+    try {
+      if (data.password !== data.confirmPassword) {
+        throw new HttpException(
+          ErrorMessages.PASSWORDS_DO_NOT_MATCH,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+
+      const user = await this.userService.findOneByEmail(data.email);
+      if (user) {
+        throw new HttpException(
+          ErrorMessages.USER_ALREADY_EXISTS,
+          HttpStatus.BAD_REQUEST,
+        );
+      }
+      data.password = await bcrypt.hash(password, 10);
+      return await this.userService.create(data);
+    } catch (e) {
+      throw new HttpException(e.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
-  findAll() {
-    return `This action returns all auth`;
+  async validateUser(email: string, password: string): Promise<any> {
+    const user = await this.userService.findOneByEmail(email);
+    if (!user) {
+      throw new HttpException(
+        ErrorMessages.INVALID_EMAIL_OR_PASSWORD,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      throw new HttpException(
+        ErrorMessages.INVALID_EMAIL_OR_PASSWORD,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return user;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
-
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+  async validateUserBasic(email: string, password: string): Promise<any> {
+    const user = await this.userService.findOneByEmail(email);
+    if (!user) {
+      throw new HttpException(
+        ErrorMessages.UNAUTHORIZED,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      throw new HttpException(
+        ErrorMessages.UNAUTHORIZED,
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+    return user;
   }
 }

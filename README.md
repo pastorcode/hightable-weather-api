@@ -1,73 +1,97 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# HighTable Weather Api Technical Challenge
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Table of Contents
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+- [Introduction](#introduction)
+-[Features](#features)
+- [Requirements](#requirements)
+- [Getting Started](#getting-started)
+    - [Installation](#installation)
+- [Project Structure](#project-structure)
+- [API Documentation](#api-documentation)
+- [Feedback](#feedback)
 
-## Description
+## Introduction
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Welcome to the HighTable Weather API, a RESTful API built with NestJS, MongoDB, and OpenWeatherAPI. This API provides weather forecast data for cities worldwide, allowing users to search for weather information based on city names and specify the temperature unit format (Celsius or Fahrenheit).
 
-## Installation
+## Features
 
-```bash
-$ npm install
-```
+- **City Search**: Users can search for weather forecasts for cities worldwide.
+- **Temperature Unit Selection**: Users can specify the desired temperature unit format (Celsius or Fahrenheit) for the weather forecast.
+- **User Authentication**: Secure endpoints with user authentication using (Basic auth method) to protect sensitive operations.
+- **User Management**: Manage user accounts with features such as get current logged in user.
+- **Weather Data**: Retrieve current weather conditions, including temperature, humidity, wind speed, and more.
 
-## Running the app
 
-```bash
-# development
-$ npm run start
+## Requirements
 
-# watch mode
-$ npm run start:dev
+Before getting started, ensure that you have the following prerequisites:
 
-# production mode
-$ npm run start:prod
-```
+- Node.js (version X.X.X)
+- npm (version X.X.X)
+- MongoDB (version X.X.X)
 
-## Test
+## Getting Started
 
-```bash
-# unit tests
-$ npm run test
+Follow the steps below to set up and run the EdTech Assessment Test application.
 
-# e2e tests
-$ npm run test:e2e
+### Installation
 
-# test coverage
-$ npm run test:cov
-```
+1. Clone the repository:
 
-## Support
+   ```bash
+   https://github.com/pastorcode/hightable-weather-api.git
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+2. Change into the project directory:
 
-## Stay in touch
+   ```bash
+   cd hightable-weather-api
+   ```
+3. Install dependencies:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+   ```bash
+    npm install
+    ```
+4. Database Setup:
 
-## License
+   Create a MongoDB database for the project.
 
-Nest is [MIT licensed](LICENSE).
+   Update the database configuration in the .env file with your database credentials:
+
+   ```bash
+    PORT=7008
+    MONGO_URI=mongodb+srv://bigdan:r7iVlLKjXblTjY2a@cluster0.wvrwpyl.mongodb.net/weather_db?retryWrites=true&w=majority&appName=Cluster0
+   
+    ```
+
+5. Start the application:
+
+   ```bash
+    npm run start:dev
+    ```
+
+## Project Structure
+
+The project structure is based on the [NestJS best practices](https://docs.nestjs.com/techniques/performance).
+
+## Design Patterns
+This project uses the following design patterns:
+* Repository Pattern
+* Service Pattern
+* Dependency Injection
+
+The project also uses the following SOLID principles:
+* Single Responsibility Principle
+* Interface Segregation Principle
+* Dependency Inversion Principle
+* Open/Closed Principle
+
+## API Documentation
+
+The API documentation is available at [http://localhost:7008/api](http://localhost:8081/docs) once the application is running.
+
+
+## Feedback
+
+Feedback! would be greatly appreciated.

@@ -1,34 +1,32 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { RegisterDto } from './dto/register.dto';
+import { LoginDto } from './dto/login.dto';
+import { SuccessMessages } from '../../utils/constants/success-messages.enum';
+import { SuccessResponseDto } from '../../utils/dtos/success-reponse.dto';
+import {  ApiTags } from '@nestjs/swagger';
+import { GetUser } from '../../utils/decorators';
+import { User } from '../users/schemas/user.schema';
+import { LocalGuard } from './passport/local.guard';
 
+@ApiTags('Authentication')
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  @Post()
-  create(@Body() createAuthDto: CreateAuthDto) {
-    return this.authService.create(createAuthDto);
+  @Post('register')
+  async register(@Body() data: RegisterDto): Promise<SuccessResponseDto> {
+    const response = this.authService.create(data);
+    return new SuccessResponseDto(SuccessMessages.REGISTERED, response);
   }
 
-  @Get()
-  findAll() {
-    return this.authService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.authService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAuthDto: UpdateAuthDto) {
-    return this.authService.update(+id, updateAuthDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.authService.remove(+id);
+  @Post('login')
+  @UseGuards(LocalGuard)
+  async login(
+    @Body() data: LoginDto,
+    @GetUser() user: User,
+  ): Promise<SuccessResponseDto> {
+    const response = user;
+    return new SuccessResponseDto(SuccessMessages.LOGGED_IN, response);
   }
 }
