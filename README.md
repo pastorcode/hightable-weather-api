@@ -3,7 +3,7 @@
 ## Table of Contents
 
 - [Introduction](#introduction)
--[Features](#features)
+- [Features](#features)
 - [Requirements](#requirements)
 - [Getting Started](#getting-started)
     - [Installation](#installation)
