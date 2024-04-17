@@ -4,7 +4,7 @@ import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 import { SuccessMessages } from '../../utils/constants/success-messages.enum';
 import { SuccessResponseDto } from '../../utils/dtos/success-reponse.dto';
-import {  ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { GetUser } from '../../utils/decorators';
 import { User } from '../users/schemas/user.schema';
 import { LocalGuard } from './passport/local.guard';
@@ -16,7 +16,7 @@ export class AuthController {
 
   @Post('register')
   async register(@Body() data: RegisterDto): Promise<SuccessResponseDto> {
-    const response = this.authService.create(data);
+    const response = await this.authService.create(data);
     return new SuccessResponseDto(SuccessMessages.REGISTERED, response);
   }
 
