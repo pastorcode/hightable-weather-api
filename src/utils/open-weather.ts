@@ -11,7 +11,7 @@ export class OpenWeather {
   }
 
   async getWeather(city: string, units: string) {
-    const url = `${this.baseUrl}/forecast?q=${city}&appid=${this.apiKey}&units=${UNIT_ENUM[units]}`;
+    const url = `${this.baseUrl}/weather?q=${city}&appid=${this.apiKey}&units=${UNIT_ENUM[units]}`;
     const response = await fetch(url);
     const resObj = await response.json();
     if (resObj.cod !== 200) {
