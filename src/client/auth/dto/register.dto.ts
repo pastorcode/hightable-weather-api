@@ -21,9 +21,6 @@ export class RegisterDto {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
-  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-    message: ErrorMessages.PASSWORD_TOO_WEAK,
-  })
   password: string;
 
   @ApiProperty()
