@@ -16,7 +16,7 @@ import { CitiesModule } from './client/cities/cities.module';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
-        uri: configService.get('MONGO_URI') || 'mongodb+srv://bigdan:r7iVlLKjXblTjY2a@cluster0.wvrwpyl.mongodb.net/weather_db?retryWrites=true&w=majority&appName=Cluster0',
+        uri: configService.get('MONGO_URI') || 'mongodb+srv://hightable:Prelaunch9-Posh-Shaky@htproduction.qigoa.mongodb.net/hightablefestival',
       }),
       inject: [ConfigService],
     }),
